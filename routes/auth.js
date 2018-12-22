@@ -21,6 +21,9 @@ router.post('/signup', function (req, res) {
     if(req.body.shopAddress === undefined){
       res.status(400).json({message:"shopAddress가 비어있습니다."})
     }
+    if(req.body.shopNumber === undefined){
+      res.status(400).json({message:"shopNumber가 비어있습니다."})
+    }
   }
   User.findOne({id: req.body.id}, function (err, users) {
     if (err) {
@@ -39,6 +42,7 @@ router.post('/signup', function (req, res) {
         shop.adminId = user._id;
         shop.name = req.body.shopName;
         shop.address = req.body.shopAddress;
+        shop.number = req.body.shopNumber;
         shop.save();
       }
 

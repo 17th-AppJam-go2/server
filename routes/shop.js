@@ -30,7 +30,8 @@ router.post('/desc', async(req, res)=>{
 		const desc = req.body.desc;
 		const shopId = req.body.shopId;
 		const shop = await Shop.updateOne({_id: shopId}, {$set: {desc: desc}});
-		res.json({data:"success"});
+		const result  = await Shop.findOne({_id:shopId}).populate({path: 'flowers'});
+		res.json({data:result});
 	} catch (e) {
 		console.log(e);
 	}
@@ -41,7 +42,8 @@ router.post('/thumbnail', upload.fields([{name:'thumbnail'}]),async(req, res) =>
 		const shopId = req.body.shopId;
 		const thumbnail = 'images/' + req.files['thumbnail'][0].filename;
 		const shop = await Shop.updateOne({_id: shopId}, {$set: {thumbnail: thumbnail}});
-		res.json({data:"success"});
+		const result  = await Shop.findOne({_id:shopId}).populate({path: 'flowers'});
+		res.json({data:result});
 	} catch (e) {
 		console.log(e)
 	}

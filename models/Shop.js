@@ -7,6 +7,8 @@ const ShopSchema = new mongoose.Schema({
     number: String,
     lat: String,
     lon: String,
+    weekdays: String,
+    weekend: String,
     thumbnail: String,
     flowers : [{ type: mongoose.Schema.Types.ObjectId, ref: 'flowers'}]
 });
